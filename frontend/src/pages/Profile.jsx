@@ -1,12 +1,10 @@
 
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link} from 'react-router-dom';
 import useFetchUserPosts from '../hooks/useFetchUserPosts';
 
 const Profile = () => {
   const {user} = useSelector(state=>state.auth);
-  const navigate = useNavigate();
-
   const posts = useFetchUserPosts(user?._id)
 
 
@@ -33,10 +31,11 @@ const Profile = () => {
           <h2 className="text-2xl font-semibold my-4">My Posts</h2>
           {posts.length > 0 ? (
             posts.map((post) => (
-              <div key={post._id} className="bg-white p-4 mb-4 rounded-lg shadow cursor-pointer" onClick={()=>navigate(`/blogs/${post._id}`)}>
+              <div key={post._id} className="bg-white p-4 mb-4 rounded-lg shadow cursor-pointer">
                 <h3 className="text-xl font-semibold mb-2">{post.title}</h3>
                 
-                <p className="text-gray-500 text-sm">Posted on {new Date(post.createdAt).toLocaleDateString()}</p>
+                <p className="text-gray-500 text-sm mb-2">Posted on {new Date(post.createdAt).toLocaleDateString()}</p>
+                <Link to={`/blogs/${post._id}`} className='text-blue-500 hover:text-blue-600'>Read blog</Link>
               </div>
             ))
           ) : (

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
+import Loader from '../components/Loader'
 
 const PostDetails = () => {
   const { id } = useParams()
@@ -22,7 +23,7 @@ const PostDetails = () => {
   }, [id])
 
   if (loading) {
-    return <p>Loading...</p>
+    return <Loader/>
   }
 
   return (
