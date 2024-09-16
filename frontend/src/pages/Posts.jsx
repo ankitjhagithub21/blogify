@@ -1,9 +1,14 @@
 import React from 'react'
 import Post from '../components/Post'
 import useFetchPosts from '../hooks/useFetchPosts'
+import Loader from '../components/Loader'
 
 const Posts = () => {
-  const posts = useFetchPosts()
+  const {loading,posts} = useFetchPosts()
+
+  if(loading){
+    return <Loader/>
+  }
   return (
     <section>
     <div className="container px-5 py-24 mx-auto">

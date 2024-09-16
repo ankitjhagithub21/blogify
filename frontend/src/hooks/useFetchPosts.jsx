@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react'
 
 const useFetchPosts = () => {
     const [posts, setPosts] = useState([])
+    const [loading,setLoading] = useState(true)
     useEffect(() => {
         const fetchPosts = async () => {
             try {
@@ -11,11 +12,16 @@ const useFetchPosts = () => {
               
             } catch (error) {
                 console.log(error)
+            }finally{
+                setLoading(false)
             }
         }
         fetchPosts()
     }, [])
-    return posts
+    return {
+        loading,
+        posts
+    }
 }
 
 export default useFetchPosts
