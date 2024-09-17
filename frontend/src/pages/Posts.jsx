@@ -1,29 +1,52 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Post from '../components/Post'
 import useFetchPosts from '../hooks/useFetchPosts'
 import Loader from '../components/Loader'
 
 const Posts = () => {
-  const {loading,posts} = useFetchPosts()
+  const { loading, posts } = useFetchPosts()
+  const [searchQuery, setSearchQuery] = useState('')
 
-  if(loading){
-    return <Loader/>
+  // Filter posts based on the search query
+  const filteredPosts = posts.filter(post =>
+    post.title.toLowerCase().includes(searchQuery.toLowerCase())
+  )
+
+  if (loading) {
+    return <Loader />
   }
+
   return (
     <section>
-    <div className="container px-5 py-24 mx-auto">
-      <h2 className='text-2xl'>Latest Blogs</h2>
-      <div className="flex flex-wrap">
-        {
-          posts.map((post)=>{
-            return <Post key={post._id} post={post}/>
-          }).reverse()
-        }
-       
+      <div className="container px-5 py-24 mx-auto">
+        
+        <div className="flex items-center bg-gray-200 px-3 mt-2 max-w-4xl mx-auto">
+          <input
+            type="text"
+            placeholder="Search blog..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="p-3 bg-transparent outline-none w-full"
+
+          />
+          <i className='fa fa-search text-2xl'></i>
+        </div>
+        <div className="flex flex-wrap">
+          {
+            filteredPosts.length > 0 ? (
+              filteredPosts.map((post) => (
+                <Post key={post._id} post={post} />
+              )).reverse()
+            ) : (
+              <div className='py-24 w-full flex items-center justify-center'>
+                    <h1 className='text-xl'>No Blog found.</h1>
+
+              </div>
+            )
+          }
+        </div>
       </div>
-    </div>
-  </section>
-  
+    </section>
   )
 }
 
