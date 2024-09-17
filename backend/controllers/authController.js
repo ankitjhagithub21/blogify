@@ -152,9 +152,57 @@ const getUser = async(req,res) =>{
     }
 }
 
+const EditProfile = async (req, res) => {
+    try {
+        // Extract the fields you want to allow for update from req.body
+        const { name, bio, profileImageUrl } = req.body;
+
+       
+        if (!req.userId) {
+            return res.status(400).json({
+                success: false,
+                message: "User ID is required."
+            });
+        }
+
+        // Find and update the user by their ID
+        const user = await User.findByIdAndUpdate(
+            req.userId, 
+            { fullName:name, bio, profilePic:profileImageUrl }, 
+            { new: true, runValidators: true } 
+        ).select("-password");
+
+        // Check if the user exists
+        if (!user) {
+            return res.status(404).json({
+                success: false,
+                message: "User not found."
+            });
+        }
+
+        // Success response with the updated user data
+        res.status(200).json({
+            success: true,
+            message:"Profile Updated successfully.",
+            user
+        });
+
+    } catch (error) {
+        // Error handling for unexpected cases
+        res.status(500).json({
+            success: false,
+            message: error.message
+        });
+    }
+};
+
+
+
+
 module.exports = {
     register,
     login,
     logout,
-    getUser
+    getUser,
+    EditProfile
 }
