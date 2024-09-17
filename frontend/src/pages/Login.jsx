@@ -6,49 +6,56 @@ import { setIsLoggedIn } from '../redux/slices/authSlice'
 
 const Login = () => {
     const navigate = useNavigate()
-    const [loading,setLoading] = useState(false)
-    const dispatch =  useDispatch()
+    const [loading, setLoading] = useState(false)
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const dispatch = useDispatch()
 
     const handleSubmit = async (e) => {
         e.preventDefault()
 
-        const formData = new FormData(e.target)
-        const formValues = Object.fromEntries(formData.entries())
+        const formData = {
+            email,
+            password
+        }
+
         setLoading(true)
         try {
-
             const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/auth/login`, {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
                 credentials: 'include',
-                body: JSON.stringify(formValues)
-
+                body: JSON.stringify(formData)
             })
 
             const data = await res.json()
 
-            if(data.success){
+            if (data.success) {
                 toast.success(data.message)
                 dispatch(setIsLoggedIn(true))
                 navigate("/")
-            }else{
+            } else {
                 toast.error(data.message)
             }
         } catch (error) {
             console.log(error)
-        }finally{
+        } finally {
             setLoading(false)
         }
-
     }
+
+    const handleDemoAccount = () => {
+        setEmail("test@gmail.com")
+        setPassword("Test@123")
+    }
+
     return (
         <section className='p-5'>
             <div className='my-24 max-w-xl mx-auto p-5 rounded-xl custom-shadow'>
                 <h2 className='text-2xl font-bold mb-5'>Login to your account.</h2>
                 <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-                  
 
                     <label className="input input-bordered flex items-center gap-2">
                         <svg
@@ -61,7 +68,14 @@ const Login = () => {
                             <path
                                 d="M15 6.954 8.978 9.86a2.25 2.25 0 0 1-1.956 0L1 6.954V11.5A1.5 1.5 0 0 0 2.5 13h11a1.5 1.5 0 0 0 1.5-1.5V6.954Z" />
                         </svg>
-                        <input type="text" className="grow" placeholder="Enter email" name='email' />
+                        <input
+                            type="text"
+                            className="grow"
+                            placeholder="Enter email"
+                            name='email'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                        />
                     </label>
 
                     <label className="input input-bordered flex items-center gap-2">
@@ -75,12 +89,21 @@ const Login = () => {
                                 d="M14 6a4 4 0 0 1-4.899 3.899l-1.955 1.955a.5.5 0 0 1-.353.146H5v1.5a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1-.5-.5v-2.293a.5.5 0 0 1 .146-.353l3.955-3.955A4 4 0 1 1 14 6Zm-4-2a.75.75 0 0 0 0 1.5.5.5 0 0 1 .5.5.75.75 0 0 0 1.5 0 2 2 0 0 0-2-2Z"
                                 clipRule="evenodd" />
                         </svg>
-                        <input type="password" className="grow" name='password' placeholder='Enter password' />
+                        <input
+                            type="password"
+                            className="grow"
+                            name='password'
+                            placeholder='Enter password'
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                        />
                     </label>
+
                     <button type='submit' disabled={loading} className={'btn btn-primary text-lg'}>Login</button>
                 </form>
                 <p className='my-5'>Don't have an account ? <Link to={"/register"} className='underline text-blue-500'>Register here</Link> </p>
-               
+                <button className='btn' onClick={handleDemoAccount}>Use demo account</button>
+
             </div>
         </section>
     )
