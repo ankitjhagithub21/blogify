@@ -115,6 +115,9 @@ const login = async(req,res) =>{
 const logout = async(req,res) =>{
    try{
     res.cookie('token','',{
+        httpOnly:true,
+        secure:true,
+        sameSite:"none",
         maxAge:0
     }).status(200).json({
         success:true,
