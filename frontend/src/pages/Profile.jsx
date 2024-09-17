@@ -12,7 +12,7 @@ const Profile = () => {
 
   return (
     <div className="container mx-auto px-4 py-24">
-      <div className="flex flex-col md:flex-row md:space-x-8">
+      <div className="flex flex-col md:flex-row md:space-x-8 md:items-start">
 
         {/* User Profile Section */}
         <div className="md:w-1/3 bg-gray-100 p-6 rounded-lg custom-shadow">
