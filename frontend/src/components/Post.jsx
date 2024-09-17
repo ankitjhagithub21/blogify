@@ -4,9 +4,9 @@ import { useNavigate } from 'react-router-dom'
 const Post = ({ post }) => {
   const navigate = useNavigate()
   return (
-    <div className="md:p-10 p-5 md:w-1/2 flex flex-col items-start cursor-pointer" onClick={()=>navigate(`/blogs/${post._id}`)}>
+    <div className="md:p-10 md:w-1/2 flex flex-col items-start cursor-pointer mb-5 md:mb-0" onClick={()=>navigate(`/blogs/${post._id}`)}>
       <img src={post?.thumbnail} alt={post.title} className='rounded-lg w-full md:h-80 object-cover'/>
-      <h2 className=" text-2xl  font-medium text-gray-900 mt-4 mb-4">
+      <h2 className=" md:text-2xl text-xl  font-medium text-gray-900 mt-4 mb-4">
         {post.title}
       </h2>
     

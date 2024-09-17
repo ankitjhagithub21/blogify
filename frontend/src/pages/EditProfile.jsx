@@ -53,7 +53,7 @@ const EditProfile = () => {
   };
 
   return (
-    <div className="flex justify-center items-center min-h-screen">
+    <div className="flex justify-center items-center min-h-screen px-5">
       <div className="w-full max-w-lg p-6 bg-white rounded-lg custom-shadow">
         <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
