@@ -128,7 +128,7 @@ const getSinglePost = async (req, res) => {
 
         const post = await Post.findById(postId).populate({
             path: "author",
-            select: "fullName profilePic"
+            select: "fullName profilePic bio"
         })
 
         if (!post) {

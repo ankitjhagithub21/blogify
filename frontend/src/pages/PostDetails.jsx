@@ -46,7 +46,9 @@ const PostDetails = () => {
           <div className="mt-5 text-lg" dangerouslySetInnerHTML={{ __html: blog?.description }} />
 
           {/* Author Details Section */}
-          <div className="mt-12 border-t-2  border-gray-200">
+          <h1 className='mt-12 text-2xl font-bold'>About the Author</h1>
+          <div className=" border-t-2 mt-2 border-gray-200">
+         
             <div className="flex items-center mt-4">
               {/* Author Image */}
               <img
@@ -58,7 +60,7 @@ const PostDetails = () => {
                 {/* Author Name */}
                 <h3 className="text-xl font-bold text-gray-900">By {blog?.author?.fullName}</h3>
                 {/* Author Bio */}
-                <p className="text-gray-600">{blog?.createdAt.slice(0,10)}</p>
+                <p className="text-gray-600">{blog?.author.bio}</p>
               </div>
             </div>
           </div>
