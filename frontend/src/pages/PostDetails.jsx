@@ -31,7 +31,7 @@ const PostDetails = () => {
       <div className="container px-5 py-24 mx-auto flex flex-col">
         <div className="max-w-5xl mx-auto">
           {/* Blog Image */}
-          <div className="rounded-lg h-96 overflow-hidden">
+          <div className="rounded-lg md:h-96 h-72 overflow-hidden">
             <img
               alt="content"
               className="object-cover object-center h-full w-full"
