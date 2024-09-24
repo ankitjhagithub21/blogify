@@ -23,8 +23,10 @@ const EditProfile = () => {
   }, [user]);
 
   const handleSubmit = async (e) => {
+
     e.preventDefault();
     setLoading(true);
+    const toastId = toast.loading("Updating your profile.")
     try {
       const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/auth/user`, {
         method: 'PUT',
@@ -49,6 +51,7 @@ const EditProfile = () => {
       toast.error('Something went wrong. Please try again.');
     } finally {
       setLoading(false);
+      toast.dismiss(toastId)
     }
   };
 
