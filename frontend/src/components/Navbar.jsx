@@ -29,7 +29,7 @@ const Navbar = () => {
       <div className="navbar bg-base-100 container mx-auto">
       <div className="flex-1">
         <Link to={"/"}>
-          <img src="./navlogo.png" alt="" width={150} className='bg-white'/>
+          <img src="/navlogo.png" alt="image upload" width={150} className='bg-white'/>
         </Link>
       </div>
       <div className="flex-none">
