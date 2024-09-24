@@ -1,31 +1,31 @@
 import { useEffect } from 'react'
 import { useDispatch } from 'react-redux'
-import { setPosts } from '../redux/slices/postSlice'
+import { setBlogs } from '../redux/slices/blogSlice'
 
 
-const useFetchUserPosts = (userId) => {
+const useFetchUserBlogs = (userId) => {
 
     const dispatch = useDispatch()
 
     useEffect(() => {
-        const fetchUserPosts = async () => {
+        const fetchUserBlogs = async () => {
             try {
-                const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/posts/users/${userId}`)
+                const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/blogs/users/${userId}`)
                 const data = await res.json()
 
                 if (data.success) {
-                    dispatch(setPosts(data.posts))
+                    dispatch(setBlogs(data.blogs))
                 }
             } catch (error) {
                 console.log(error)
             }
         }
         if (userId) {
-            fetchUserPosts()
+            fetchUserBlogs()
         }
     }, [])
 
 
 }
 
-export default useFetchUserPosts
+export default useFetchUserBlogs

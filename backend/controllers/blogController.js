@@ -1,7 +1,7 @@
-const Post = require("../models/post")
+const Blog = require("../models/blog")
 const User = require("../models/user")
 
-const createPost = async (req, res) => {
+const createBlog = async (req, res) => {
     try {
         const { title, description, thumbnail } = req.body;
         const user = await User.findById(req.userId).select("-password")
@@ -13,25 +13,25 @@ const createPost = async (req, res) => {
             })
         }
 
-        const post = new Post({
+        const blog = new Blog({
             title,
             description,
             thumbnail,
             author: req.userId
         })
 
-        if (post) {
-            user.posts.push(post._id)
+        if (blog) {
+            user.blogs.push(blog._id)
         }
 
 
-        await Promise.all([post.save(), user.save()])
+        await Promise.all([blog.save(), user.save()])
 
 
         res.status(201).json({
             success: true,
-            message: "Post created successfully.",
-            post
+            message: "blog created successfully.",
+            blog
         })
 
 
@@ -43,22 +43,22 @@ const createPost = async (req, res) => {
     }
 }
 
-const deletePost = async (req, res) => {
+const deleteBlog = async (req, res) => {
     try {
-        const { postId } = req.params;
+        const { blogId } = req.params;
 
-        // Find the post by its ID
-        const post = await Post.findById(postId);
+        // Find the blog by its ID
+        const blog = await Blog.findById(blogId);
 
-        // If the post is not found, return a 404 error
-        if (!post) {
+        // If the blog is not found, return a 404 error
+        if (!blog) {
             return res.status(404).json({
                 success: false,
-                message: "Post not found",
+                message: "blog not found",
             });
         }
 
-        // Find the user who is trying to delete the post, and exclude the password field
+        // Find the user who is trying to delete the blog, and exclude the password field
         const user = await User.findById(req.userId).select("-password");
 
         // If the user is not found, return a 401 error (unauthorized)
@@ -69,27 +69,27 @@ const deletePost = async (req, res) => {
             });
         }
 
-        // Check if the user is the author of the post
-        if (post.author.toString() !== user._id.toString()) {
+        // Check if the user is the author of the blog
+        if (blog.author.toString() !== user._id.toString()) {
             return res.status(403).json({
                 success: false,
-                message: "You cannot delete someone else's post.",
+                message: "You cannot delete someone else's blog.",
             });
         }
 
-        // Remove the post ID from the user's posts array if it exists
-        const postIndex = user.posts.indexOf(post._id);
-        if (postIndex > -1) {
-            user.posts.splice(postIndex, 1);
+        // Remove the blog ID from the user's blogs array if it exists
+        const blogIndex = user.blogs.indexOf(blog._id);
+        if (blogIndex > -1) {
+            user.blogs.splice(blogIndex, 1);
         }
 
-        // Save user changes and delete the post
-        await Promise.all([user.save(), post.deleteOne()]);
+        // Save user changes and delete the blog
+        await Promise.all([user.save(), blog.deleteOne()]);
 
         // Respond with success
         res.status(200).json({
             success: true,
-            message: "Post deleted successfully",
+            message: "blog deleted successfully",
         });
 
     } catch (error) {
@@ -102,14 +102,14 @@ const deletePost = async (req, res) => {
 };
 
 
-const getAllPost = async (req, res) => {
+const getAllBlogs = async (req, res) => {
     try {
-        const posts = await Post.find({}).populate({
+        const blogs = await Blog.find({}).populate({
             path: "author",
             select: "fullName profilePic"
         })
 
-        res.status(200).json(posts)
+        res.status(200).json(blogs)
 
     } catch (error) {
         res.status(500).json({
@@ -121,25 +121,25 @@ const getAllPost = async (req, res) => {
 
 
 
-const getSinglePost = async (req, res) => {
+const getSingleBlog = async (req, res) => {
     try {
 
-        const { postId } = req.params;
+        const { blogId } = req.params;
 
-        const post = await Post.findById(postId).populate({
+        const blog = await blog.findById(blogId).populate({
             path: "author",
             select: "fullName profilePic bio"
         })
 
-        if (!post) {
+        if (!blog) {
             return res.status(404).json({
                 success: false,
-                message: "Post not found."
+                message: "blog not found."
             })
         }
         res.status(200).json({
             success: true,
-            post
+            blog
         })
     } catch (error) {
         res.status(500).json({
@@ -149,24 +149,24 @@ const getSinglePost = async (req, res) => {
     }
 }
 
-const getUserPosts = async (req, res) => {
+const getUserBlogs = async (req, res) => {
     try {
         const { userId } = req.params;
 
-        // Find all posts where the author is the userId
-        const posts = await Post.find({ author: userId });
+        // Find all blogs where the author is the userId
+        const blogs = await Blog.find({ author: userId });
 
-        // Check if posts are found
-        if (posts.length === 0) {
+        // Check if blogs are found
+        if (blogs.length === 0) {
             return res.status(404).json({
                 success: false,
-                message: "No posts found."
+                message: "No blogs found."
             });
         }
 
         res.status(200).json({
             success: true,
-            posts
+            blogs
         });
 
     } catch (error) {
@@ -178,9 +178,9 @@ const getUserPosts = async (req, res) => {
 }
 
 module.exports = {
-    createPost,
-    deletePost,
-    getAllPost,
-    getSinglePost,
-    getUserPosts,
+    createBlog,
+    deleteBlog,
+    getAllBlogs,
+    getSingleBlog,
+    getUserBlogs,
 }

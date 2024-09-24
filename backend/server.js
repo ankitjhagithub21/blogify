@@ -3,8 +3,8 @@ const express = require('express')
 const cors = require('cors')
 const cookieParser = require('cookie-parser')
 const connectDb = require('./dbconnection')
-const postRouter = require('./routes/postRoutes')
 const authRouter = require('./routes/authRoutes')
+const blogRouter = require('./routes/blogRoutes')
 const app = express()
 
 const port = process.env.PORT || 3000
@@ -24,7 +24,7 @@ app.get('/', (req, res) => {
   })
 })
 
-app.use("/posts",postRouter)
+app.use("/blogs",blogRouter)
 app.use("/auth",authRouter)
 
 

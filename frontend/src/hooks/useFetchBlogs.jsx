@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from 'react'
 
-const useFetchPosts = () => {
-    const [posts, setPosts] = useState([])
+const useFetchBlogs = () => {
+    const [blogs, setBlogs] = useState([])
     const [loading,setLoading] = useState(true)
     useEffect(() => {
-        const fetchPosts = async () => {
+        const fetchBlogs = async () => {
             try {
-                const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/posts`)
+                const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/blogs`)
                 const data = await res.json()
-                setPosts(data)
+                setBlogs(data)
               
             } catch (error) {
                 console.log(error)
@@ -16,12 +16,12 @@ const useFetchPosts = () => {
                 setLoading(false)
             }
         }
-        fetchPosts()
+        fetchBlogs()
     }, [])
     return {
         loading,
-        posts
+        blogs
     }
 }
 
-export default useFetchPosts
+export default useFetchBlogs

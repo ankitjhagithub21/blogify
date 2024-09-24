@@ -1,13 +1,13 @@
 import { useSelector } from 'react-redux';
-import useFetchUserPosts from '../hooks/useFetchUserPosts';
 import UserBlogs from "../components/UserBlogs";
 import { Link } from 'react-router-dom';
+import useFetchUserBlogs from '../hooks/useFetchUserBlogs';
 
 const Profile = () => {
   const { user } = useSelector(state => state.auth);
-  useFetchUserPosts(user?._id)
+  useFetchUserBlogs(user?._id)
 
-  const {posts} = useSelector(state=>state.posts)
+  const {blogs} = useSelector(state=>state.blogs)
 
 
   return (
@@ -30,7 +30,7 @@ const Profile = () => {
         </div>
 
         {/* User Posts Section */}
-        <UserBlogs posts={posts} />
+        <UserBlogs blogs={blogs} />
        
       </div>
     </div>

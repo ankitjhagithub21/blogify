@@ -1,11 +1,12 @@
 import React from 'react'
-import Posts from './Posts'
+import Blogs from './Blogs'
+
 
 const Home = () => {
   return (
-    <div>
-      <Posts/>
-    </div>
+    <>
+      <Blogs/>
+    </>
   )
 }
 

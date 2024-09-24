@@ -1,15 +1,15 @@
 import React, { useState } from 'react'
-import Post from '../components/Post'
-import useFetchPosts from '../hooks/useFetchPosts'
+import useFetchBlogs from '../hooks/useFetchBlogs'
 import Loader from '../components/Loader'
+import Blog from '../components/Blog'
 
-const Posts = () => {
-  const { loading, posts } = useFetchPosts()
+const Blogs = () => {
+  const { loading, blogs } = useFetchBlogs()
   const [searchQuery, setSearchQuery] = useState('')
 
   // Filter posts based on the search query
-  const filteredPosts = posts.filter(post =>
-    post.title.toLowerCase().includes(searchQuery.toLowerCase())
+  const filteredBlogs = blogs.filter(blog =>
+    blog.title.toLowerCase().includes(searchQuery.toLowerCase())
   )
 
   if (loading) {
@@ -33,9 +33,9 @@ const Posts = () => {
         </div>
         <div className="flex flex-wrap">
           {
-            filteredPosts.length > 0 ? (
-              filteredPosts.map((post) => (
-                <Post key={post._id} post={post} />
+            filteredBlogs.length > 0 ? (
+              filteredBlogs.map((blog) => (
+                <Blog key={blog._id} blog={blog} />
               )).reverse()
             ) : (
               <div className='py-24 w-full flex items-center justify-center'>
@@ -50,4 +50,4 @@ const Posts = () => {
   )
 }
 
-export default Posts
+export default Blogs

@@ -29,7 +29,7 @@ const Navbar = () => {
       <div className="navbar bg-base-100 container mx-auto">
       <div className="flex-1">
         <Link to={"/"}>
-          <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTTmUQG7o16JyzAdF76GecAOo7wsGCuRJp8Gg&s" alt="" width={150}/>
+          <img src="./navlogo.png" alt="" width={150} className='bg-white'/>
         </Link>
       </div>
       <div className="flex-none">
@@ -50,7 +50,7 @@ const Navbar = () => {
             className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-3 w-52 p-2 shadow">
            
             <li><Link to={"/profile"}>Profile</Link></li>
-            <li><Link to={"/create"}>Create Post</Link></li>
+            <li><Link to={"/create"}>Create Blog</Link></li>
             <li onClick={handleLogout}><a>Logout</a></li>
           </ul>
         </div> : <Link to={"/login"} className='btn btn-primary'>Login</Link>

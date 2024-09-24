@@ -4,7 +4,7 @@ import {useSelector} from 'react-redux';
 import LoadingBar from 'react-top-loading-bar';
 import JoditEditor from 'jodit-react';
 
-const CreatePost = () => {
+const CreateBlog = () => {
   const {user} = useSelector(state=>state.auth)
   const [loading, setLoading] = useState(false);
   const editor = useRef(null); // Reference for Jodit Editor
@@ -32,7 +32,7 @@ const CreatePost = () => {
     ref.current.continuousStart(); // Start LoadingBar
 
     try {
-      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/posts`, {
+      const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/blogs`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -66,7 +66,7 @@ const CreatePost = () => {
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
       <input type="text" className='input input-bordered' name='thumbnail' placeholder='Paste image url' required/>
         
-      <input type="text" className='input input-bordered' name='title' placeholder='Enter title' required/>
+      <input type="text" className='input input-bordered ' name='title' placeholder='Enter title' required/>
         {/* JoditEditor for rich text editing */}
         <JoditEditor
           ref={editor}
@@ -79,7 +79,7 @@ const CreatePost = () => {
 
         <button
           type="submit"
-          className="btn btn-neutral mt-3"
+          className="btn btn-primary mt-3"
           disabled={loading}
         >
           {loading ? 'Creating...' : 'Create'}
@@ -89,4 +89,4 @@ const CreatePost = () => {
   );
 };
 
-export default CreatePost;
+export default CreateBlog;

@@ -23,10 +23,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         default:""
     },
-    posts:[
+    blogs:[
         {
             type:mongoose.Schema.Types.ObjectId,
-            ref:"Post",
+            ref:"Blog",
             default:[]
         }
     ]

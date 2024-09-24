@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import Loader from '../components/Loader'
 
-const PostDetails = () => {
+const BlogDetails = () => {
   const { id } = useParams()
   const [blog, setBlog] = useState(null)
   const [loading, setLoading] = useState(true)
@@ -10,7 +10,7 @@ const PostDetails = () => {
   useEffect(() => {
     const fetchBlog = async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/posts/${id}`)
+        const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/blogs/${id}`)
         const data = await res.json()
         setBlog(data.post)
       } catch (error) {
@@ -70,4 +70,4 @@ const PostDetails = () => {
   )
 }
 
-export default PostDetails
+export default BlogDetails
