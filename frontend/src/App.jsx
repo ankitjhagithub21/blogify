@@ -19,7 +19,7 @@ const App = () => {
   const {user} = useSelector(state=>state.auth)
   return (
     <BrowserRouter>
-      <ToastContainer theme='dark' autoClose={1500}/>
+      <ToastContainer theme='dark' autoClose={1500} />
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />

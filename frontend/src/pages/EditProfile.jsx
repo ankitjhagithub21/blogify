@@ -56,7 +56,7 @@ const EditProfile = () => {
     <div className="flex justify-center items-center min-h-screen px-5">
       <div className="w-full max-w-lg p-6 bg-white rounded-lg custom-shadow">
         <h2 className="text-2xl font-bold mb-4">Edit Profile</h2>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form onSubmit={handleSubmit} className="space-y-6 ">
           {/* Profile Image URL Input */}
           <div className="form-control">
             <label className="label">
@@ -67,7 +67,8 @@ const EditProfile = () => {
               placeholder="Paste profile image URL"
               value={profileImageUrl}
               onChange={(e) => setProfileImageUrl(e.target.value)}
-              className="input input-bordered w-full"
+              className="input input-primary bg-transparent input-bordered w-full"
+              required
             />
           </div>
 
@@ -81,7 +82,8 @@ const EditProfile = () => {
               placeholder="Enter your name"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="input input-bordered w-full"
+              className="input input-primary bg-transparent input-bordered w-full"
+              required
             />
           </div>
 
@@ -94,8 +96,9 @@ const EditProfile = () => {
               placeholder="Tell something about yourself"
               value={bio}
               onChange={(e) => setBio(e.target.value)}
-              className="textarea textarea-bordered w-full resize-none"
+              className="textarea textarea-primary bg-transparent  textarea-bordered w-full resize-none"
               rows="4"
+              
             ></textarea>
           </div>
 
