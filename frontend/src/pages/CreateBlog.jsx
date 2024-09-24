@@ -74,7 +74,7 @@ const CreateBlog = () => {
           config={config}
           tabIndex={1}
           onBlur={newContent => setContent(newContent)} // Update content when blurred
-
+            className='text-gray-900'
         />
 
         <button

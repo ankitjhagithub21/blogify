@@ -22,6 +22,6 @@ body{
     color: black;
   }
   .loader:before {
-    content:"Blogs loading..."
+    content:"loading..."
   }
   @keyframes l2 {to{background-size: 100% 3px}}
