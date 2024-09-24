@@ -12,7 +12,7 @@ const BlogDetails = () => {
       try {
         const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/blogs/${id}`)
         const data = await res.json()
-        setBlog(data.post)
+        setBlog(data.blog)
       } catch (error) {
         console.log(error)
       } finally {

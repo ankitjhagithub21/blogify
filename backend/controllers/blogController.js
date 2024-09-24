@@ -126,7 +126,7 @@ const getSingleBlog = async (req, res) => {
 
         const { blogId } = req.params;
 
-        const blog = await blog.findById(blogId).populate({
+        const blog = await Blog.findById(blogId).populate({
             path: "author",
             select: "fullName profilePic bio"
         })
