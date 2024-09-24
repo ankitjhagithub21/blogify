@@ -6,6 +6,7 @@ import { setIsLoggedIn } from '../redux/slices/authSlice'
 
 const Login = () => {
     const navigate = useNavigate()
+
     const [loading, setLoading] = useState(false)
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -20,6 +21,7 @@ const Login = () => {
         }
 
         setLoading(true)
+        const toastId = toast.loading("Processing your data.")
         try {
             const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/auth/login`, {
                 method: "POST",
@@ -43,6 +45,7 @@ const Login = () => {
             console.log(error)
         } finally {
             setLoading(false)
+            toast.dismiss(toastId)
         }
     }
 
@@ -57,7 +60,7 @@ const Login = () => {
                 <h2 className='text-2xl font-bold mb-5'>Login to your account.</h2>
                 <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
 
-                    <label className="input input-bordered flex items-center gap-2">
+                    <label className="input input-primary input-bordered bg-transparent  flex items-center gap-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 16 16"
@@ -70,15 +73,16 @@ const Login = () => {
                         </svg>
                         <input
                             type="text"
-                            className="grow"
+                            className="grow "
                             placeholder="Enter email"
                             name='email'
+                            
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                         />
                     </label>
 
-                    <label className="input input-bordered flex items-center gap-2">
+                    <label className="input input-primary bg-transparent input-bordered flex items-center gap-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 16 16"

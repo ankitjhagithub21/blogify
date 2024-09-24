@@ -52,7 +52,7 @@ const Register = () => {
             <div className='my-24 max-w-xl mx-auto p-5 rounded-xl custom-shadow'>
                 <h2 className='text-2xl font-bold mb-5'>Create an account</h2>
                 <form className='flex flex-col gap-4' onSubmit={handleSubmit}>
-                    <label className="input input-bordered flex items-center gap-2 ">
+                    <label className="input  input-primary bg-transparent input-bordered flex items-center gap-2 ">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 16 16"
@@ -64,7 +64,7 @@ const Register = () => {
                         <input type="text" className="grow" placeholder="Enter your name" name='fullName' />
                     </label>
 
-                    <label className="input input-bordered flex items-center gap-2">
+                    <label className="input input-primary bg-transparent input-bordered flex items-center gap-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 16 16"
@@ -78,7 +78,7 @@ const Register = () => {
                         <input type="text" className="grow" placeholder="Enter email" name='email' />
                     </label>
 
-                    <label className="input input-bordered flex items-center gap-2">
+                    <label className="input input-primary bg-transparent input-bordered flex items-center gap-2">
                         <svg
                             xmlns="http://www.w3.org/2000/svg"
                             viewBox="0 0 16 16"
