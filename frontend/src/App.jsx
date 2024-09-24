@@ -2,7 +2,7 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom'
 import "./App.css"
 import Navbar from './components/Navbar'
 import Home from './pages/Home'
-import { Toaster } from "react-hot-toast"
+import { ToastContainer } from "react-toastify"
 import Register from './pages/Register'
 import Login from './pages/Login'
 import useFetchAuthUser from './hooks/useFetchAuthUser'
@@ -12,13 +12,14 @@ import EditProfile from './pages/EditProfile'
 import { useSelector } from 'react-redux'
 import CreateBlog from './pages/CreateBlog'
 import BlogDetails from './pages/BlogDetails'
+import 'react-toastify/dist/ReactToastify.css';
 
 const App = () => {
   useFetchAuthUser()
   const {user} = useSelector(state=>state.auth)
   return (
     <BrowserRouter>
-      <Toaster />
+      <ToastContainer theme='dark' autoClose={1500}/>
       <Navbar />
       <Routes>
         <Route path='/' element={<Home />} />

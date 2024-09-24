@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import toast from 'react-hot-toast'
+import {toast} from 'react-toastify'
 import { useDispatch } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import { setIsLoggedIn } from '../redux/slices/authSlice'
@@ -11,10 +11,11 @@ const Register = () => {
 
     const handleSubmit = async (e) => {
         e.preventDefault()
-
+         
         const formData = new FormData(e.target)
         const formValues = Object.fromEntries(formData.entries())
         setLoading(true)
+        const toastId = toast.loading("Processing your data.")
         try {
 
             const res = await fetch(`${import.meta.env.VITE_SERVER_URL}/auth/register`, {
@@ -41,6 +42,7 @@ const Register = () => {
             console.log(error)
         }finally{
             setLoading(false)
+            toast.dismiss(toastId)
         }
 
 

@@ -1,5 +1,5 @@
 import { useState, useRef, useMemo } from 'react';
-import toast from 'react-hot-toast';
+import {toast} from 'react-toastify';
 import {useSelector} from 'react-redux';
 import LoadingBar from 'react-top-loading-bar';
 import JoditEditor from 'jodit-react';

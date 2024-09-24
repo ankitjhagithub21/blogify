@@ -2,7 +2,7 @@ import React from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { Link } from 'react-router-dom'
 import { setIsLoggedIn, setUser } from '../redux/slices/authSlice'
-import toast from 'react-hot-toast'
+import {toast} from 'react-toastify'
 
 const Navbar = () => {
   const {user} = useSelector(state=>state.auth)
