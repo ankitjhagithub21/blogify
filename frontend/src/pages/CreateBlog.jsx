@@ -64,9 +64,9 @@ const CreateBlog = () => {
       <LoadingBar color="#f11946" ref={ref} />
       <h2 className="text-2xl font-bold text-center mb-5">Create Post</h2>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-      <input type="text" className='input input-bordered' name='thumbnail' placeholder='Paste image url' required/>
+      <input type="text" className='input input-bordered bg-transparent ' name='thumbnail' placeholder='Paste image url' required/>
         
-      <input type="text" className='input input-bordered ' name='title' placeholder='Enter title' required/>
+      <input type="text" className='input input-bordered bg-transparent' name='title' placeholder='Enter title' required/>
         {/* JoditEditor for rich text editing */}
         <JoditEditor
           ref={editor}
